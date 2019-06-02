@@ -86,7 +86,7 @@ void print_help() {
 )";
 }
 
-Options::Options(int argc, char** argv) {
+Options::Options(int argc, char** argv) : check_all(false) {
     if (argc <= 1) {
         print_help();
         throw invalid_argument("arg count error");
