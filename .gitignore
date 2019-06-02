@@ -1,0 +1,17 @@
+##
+## Created by sky91 - feitiandaxia1991@163.com
+##
+
+# Gradle
+.gradle/
+build/
+
+# IntelliJ IDEA
+.idea/
+*.iml
+*.ipr
+*.iws
+out/
+
+# Clion
+cmake-build-*
