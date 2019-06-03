@@ -23,6 +23,7 @@ bool do_check(const string& input, const Options& options);
 const char* OPTION_ALL = "--all";
 const char* OPTION_ADD = "--add";
 
+
 int main(int argc, char* argv[]) {
     Options options{argc, argv};
 
@@ -36,6 +37,7 @@ int main(int argc, char* argv[]) {
 
     return !do_check(input, options);
 }
+
 
 bool do_check(const string& input, const Options& options) {
     int tb[256] = {0};
@@ -59,7 +61,7 @@ bool do_check(const string& input, const Options& options) {
             continue;
         }
         string line{i->str()};
-        if (accumulate(bs.begin(), bs.end(), 0, [&tb](int sum, char c) { return sum + tb[c]; }) != n) {
+        if (accumulate(bs.begin(), bs.end(), 0, [tb](int sum, char c) { return sum + tb[c]; }) != n) {
             cout << "[FAIL]: " << line << endl;
             cerr << line << endl;
             successful = false;
@@ -70,7 +72,6 @@ bool do_check(const string& input, const Options& options) {
 
     return successful;
 }
-
 
 int popcount(uint32_t i) {
     i = i - ((i >> 1u) & 0x55555555u);
@@ -97,6 +98,9 @@ Options::Options(int argc, char** argv) : check_all(false) {
             check_all = true;
         } else if (opt == OPTION_ADD) {
             check_adds.emplace(argv[++i]);
+        } else {
+            print_help();
+            throw invalid_argument("arg format error");
         }
     }
 }

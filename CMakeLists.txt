@@ -9,4 +9,4 @@ if (${MINGW})
     target_link_options(cz-verilog-check
         PUBLIC $<$<CXX_COMPILER_ID:GNU>:-static-libgcc -static-libstdc++ -static>)
 endif ()
-target_link_options(cz-verilog-check PUBLIC $<$<CONFIG:Release>:-s>)
+target_link_options(cz-verilog-check PUBLIC $<$<AND:$<CONFIG:Release>,$<CXX_COMPILER_ID:GNU>>:-s>)
